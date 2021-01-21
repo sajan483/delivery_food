@@ -90,7 +90,7 @@ class FirstHalf extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(35, 25, 0, 0),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
           CustomAppBar(),
@@ -102,7 +102,7 @@ class FirstHalf extends StatelessWidget {
           SizedBox(height: 45),
           categories(),
           SizedBox(height: 10),
-         products()
+          products()
         ],
       ),
     );
@@ -158,13 +158,27 @@ Widget categories() {
 
 Widget products() {
   return Container(
-    height: 250,
     child: ListView.builder(
-    itemCount: wonders.length,
-    itemBuilder: (context, index) {
-        return ListTile(leading: Image.network(wonders[index].imageUrl,), title: Text(wonders[index].name), subtitle: Text(wonders[index].country),);
-    },
-),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: wonders.length,
+      itemBuilder: (context, index) {
+        return Card(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                child: FittedBox(
+                  child: Image.network(wonders[index].imageUrl),
+                  fit: BoxFit.fill,
+                ),
+                padding: EdgeInsets.all(10),
+              ),
+              Text(wonders[index].name)
+            ],
+          ),
+        );
+      },
+    ),
   );
 }
 
@@ -268,6 +282,51 @@ class Items extends StatelessWidget {
   }
 }
 
+Widget listCard() {
+  return Container(
+    child: Card(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        children: [
+          ListTile(
+            leading: Icon(Icons.arrow_drop_down_circle),
+            title: const Text('Card title 1'),
+            subtitle: Text(
+              'Secondary Text',
+              style: TextStyle(color: Colors.black.withOpacity(0.6)),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Image(image: AssetImage('assets/burger.jpeg')),
+          ),
+          ButtonBar(
+            alignment: MainAxisAlignment.start,
+            children: [
+              FlatButton(
+                textColor: const Color(0xFF6200EE),
+                onPressed: () {
+                  // Perform some action
+                },
+                child: const Text('ACTION 1'),
+              ),
+              FlatButton(
+                textColor: const Color(0xFF6200EE),
+                onPressed: () {
+                  // Perform some action
+                },
+                child: const Text('ACTION 2'),
+              ),
+            ],
+          ),
+          Image.asset('assets/card-sample-image.jpg'),
+          Image.asset('assets/card-sample-image-2.jpg'),
+        ],
+      ),
+    ),
+  );
+}
+
 class CategoryListItem extends StatelessWidget {
   const CategoryListItem({
     Key key,
@@ -289,7 +348,7 @@ class CategoryListItem extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40),
-         color:Colors.orange,
+        color: Colors.orange,
         border: Border.all(
             color: selected ? Colors.transparent : Colors.grey[200],
             width: 1.5),
@@ -424,37 +483,32 @@ class Place {
 List wonders = [
   Place(
       imageUrl:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_5Tm6zENIBi4wm7hySAuyg8kkQBFahXtoQw&usqp=CAU",
+          "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
       name: "Taj Mahal",
       country: "India"),
   Place(
       imageUrl:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5dlF_QufM1gWI0_k5WcVAXp0iburoJ9ayBw&usqp=CAU",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRgDq2lpftUsHdJuwUny9AfbFEe7mV_sragQ&usqp=CAU",
       name: "Christ the Redeemer",
       country: "Brazil"),
   Place(
       imageUrl:
-          "https://d36tnp772eyphs.cloudfront.net/blogs/1/2016/03/petra-jordan9.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
       name: "Petra",
       country: "Jordan"),
   Place(
       imageUrl:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5dlF_QufM1gWI0_k5WcVAXp0iburoJ9ayBw&usqp=CAU",
-      name: "The Great Wall of China",
-      country: "China"),
+          "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
+      name: "Taj Mahal",
+      country: "India"),
   Place(
       imageUrl:
-          "https://d36tnp772eyphs.cloudfront.net/blogs/1/2018/02/View-of-the-Colosseum.jpg",
-      name: "The Colosseum",
-      country: "Rome"),
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoHXZh9ifxtm_uJ9WZpb7aBjzPW3bytkMWag&usqp=CAU",
+      name: "Christ the Redeemer",
+      country: "Brazil"),
   Place(
       imageUrl:
-          "https://d36tnp772eyphs.cloudfront.net/blogs/1/2018/02/Machu-Picchu-around-sunset.jpg",
-      name: "Machu Picchu",
-      country: "Peru"),
-  Place(
-      imageUrl:
-          "https://d36tnp772eyphs.cloudfront.net/blogs/1/2018/02/Chichen-Itza-at-night.jpg",
-      name: "Chichén Itzá",
-      country: "Mexico"),
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
+      name: "Petra",
+      country: "Jordan"),
 ];
