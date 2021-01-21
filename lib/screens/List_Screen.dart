@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_app/Models/Product.dart';
 import 'package:flutter_app/screens/Login_Screen.dart';
+import 'package:flutter_app/screens/Product_Dettails_Screen.dart';
 
 class ListPage extends StatefulWidget {
   @override
@@ -135,13 +137,13 @@ Widget categories() {
         ),
         CategoryListItem(
           categoryIcon: Icons.fastfood,
-          categoryName: "Idli Sambhar",
+          categoryName: "Idli",
           availability: 1,
           selected: true,
         ),
         CategoryListItem(
           categoryIcon: Icons.fastfood,
-          categoryName: "Masala Dosa",
+          categoryName: "Dosa",
           availability: 1,
           selected: true,
         ),
@@ -163,20 +165,39 @@ Widget products() {
       physics: NeverScrollableScrollPhysics(),
       itemCount: wonders.length,
       itemBuilder: (context, index) {
-        return Card(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                child: FittedBox(
-                  child: Image.network(wonders[index].imageUrl),
-                  fit: BoxFit.fill,
-                ),
-                padding: EdgeInsets.all(10),
+        return InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProductDetailsPage(
+                            product: wonders[index],
+                          )));
+            },
+            child: Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    child: FittedBox(
+                      child: Image.network(wonders[index].imageUrl),
+                      fit: BoxFit.fill,
+                    ),
+                    padding: EdgeInsets.all(10),
+                  ),
+                  Padding(
+                      child: Text(
+                        wonders[index].name,
+                      ),
+                      padding: EdgeInsets.only(left: 10)),
+                  Padding(
+                      child: Text(
+                        wonders[index].price,
+                      ),
+                      padding: EdgeInsets.all(10))
+                ],
               ),
-              Text(wonders[index].name)
-            ],
-          ),
-        );
+            ));
       },
     ),
   );
@@ -445,7 +466,7 @@ Widget title() {
             ),
           ),
           Text(
-            "Tukk",
+            "Cart",
             style: TextStyle(
               fontWeight: FontWeight.w200,
               fontSize: 30,
@@ -472,43 +493,35 @@ class CustomAppBar extends StatelessWidget {
   }
 }
 
-class Place {
-  String imageUrl;
-  String name;
-  String country;
-
-  Place({this.imageUrl, this.name, this.country});
-}
-
 List wonders = [
-  Place(
+  Product(
       imageUrl:
           "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
-      name: "Taj Mahal",
-      country: "India"),
-  Place(
+      name: "Burgger",
+      price: "RS:120"),
+  Product(
       imageUrl:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRgDq2lpftUsHdJuwUny9AfbFEe7mV_sragQ&usqp=CAU",
-      name: "Christ the Redeemer",
-      country: "Brazil"),
-  Place(
+      name: "Vanilla Cream",
+      price: "RS:100"),
+  Product(
       imageUrl:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
-      name: "Petra",
-      country: "Jordan"),
-  Place(
+      name: "Coffee",
+      price: "RS:50"),
+  Product(
       imageUrl:
           "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
-      name: "Taj Mahal",
-      country: "India"),
-  Place(
+      name: "Burgger",
+      price: "RS:120"),
+  Product(
       imageUrl:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoHXZh9ifxtm_uJ9WZpb7aBjzPW3bytkMWag&usqp=CAU",
-      name: "Christ the Redeemer",
-      country: "Brazil"),
-  Place(
+      name: "Vanilla Cream",
+      price: "RS:100"),
+  Product(
       imageUrl:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
-      name: "Petra",
-      country: "Jordan"),
+      name: "Brue Coffee",
+      price: "RS:50"),
 ];
