@@ -17,7 +17,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           child: Column(
         children: <Widget>[
           Image.network(
-            widget.product.imageUrl,
+            widget.product.image,
             fit: BoxFit.fill,
           ),
           Text(widget.product.name),
