@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Models/Product.dart';
+import 'package:flutter_app/screens/List_Screen.dart';
 import 'package:flutter_app/screens/Payment_Screen.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  Product product;
+  Prod product;
   ProductDetailsPage({Key key, this.product});
   @override
   _ProductDetailsPageState createState() => _ProductDetailsPageState();
@@ -17,7 +17,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           child: Column(
         children: <Widget>[
           Image.network(
-            widget.product.image,
+            widget.product.imageUrl,
             fit: BoxFit.fill,
           ),
           Text(widget.product.name),

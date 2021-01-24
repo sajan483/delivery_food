@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_app/Models/Product.dart';
 import 'package:flutter_app/screens/Login_Screen.dart';
+import 'package:flutter_app/screens/Payment_Screen.dart';
 import 'package:flutter_app/screens/Product_Dettails_Screen.dart';
 import 'package:flutter_app/Service/Api_Service.dart';
 
@@ -15,7 +16,7 @@ class _ListPageState extends State<ListPage> {
 
   @override
   void initState() {
-    fetchProduct();
+    //fetchProduct();
     super.initState();
   }
 
@@ -98,6 +99,7 @@ class _ListPageState extends State<ListPage> {
         productList.add(value);
       }
     });
+    print(productList);
   }
 }
 
@@ -121,7 +123,7 @@ class FirstHalf extends StatelessWidget {
           SizedBox(height: 45),
           categories(),
           SizedBox(height: 10),
-          // products()
+          products()
         ],
       ),
     );
@@ -175,50 +177,81 @@ Widget categories() {
   );
 }
 
-// Widget products() {
-//   return Container(
-//     child: ListView.builder(
-//       shrinkWrap: true,
-//       physics: NeverScrollableScrollPhysics(),
-//       itemCount: prod.length,
-//       itemBuilder: (context, index) {
-//         return InkWell(
-//             onTap: () {
-//               Navigator.push(
-//                   context,
-//                   MaterialPageRoute(
-//                       builder: (context) => ProductDetailsPage(
-//                             product: wonders[index],
-//                           )));
-//             },
-//             child: Card(
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: <Widget>[
-//                   Padding(
-//                     child: FittedBox(
-//                       child: Image.network(wonders[index].imageUrl),
-//                       fit: BoxFit.fill,
-//                     ),
-//                     padding: EdgeInsets.all(10),
-//                   ),
-//                   Padding(
-//                       child: Text(
-//                         wonders[index].name,
-//                       ),
-//                       padding: EdgeInsets.only(left: 10)),
-//                   Padding(
-//                       child: Text(
-//                         wonders[index].price,
-//                       ),
-//                       padding: EdgeInsets.all(10))
-//                 ],
-//               ),
-//             ));
-//       },
-//     ),
-//   );
-// }
+Widget products() {
+  List wonders = [
+    Prod(
+        imageUrl:
+            "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
+        name: "Burgger",
+        price: "RS:120"),
+    Prod(
+        imageUrl:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRgDq2lpftUsHdJuwUny9AfbFEe7mV_sragQ&usqp=CAU",
+        name: "Vanilla Cream",
+        price: "RS:100"),
+    Prod(
+        imageUrl:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
+        name: "Coffee",
+        price: "RS:50"),
+    Prod(
+        imageUrl:
+            "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
+        name: "Burgger",
+        price: "RS:120"),
+    Prod(
+        imageUrl:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoHXZh9ifxtm_uJ9WZpb7aBjzPW3bytkMWag&usqp=CAU",
+        name: "Vanilla Cream",
+        price: "RS:100"),
+    Prod(
+        imageUrl:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
+        name: "Brue Coffee",
+        price: "RS:50"),
+  ];
+
+  return Container(
+    child: ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: wonders.length,
+      itemBuilder: (context, index) {
+        return InkWell(
+            onTap: () {
+              var wonders;
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PaymentPage()));
+            },
+            child: Card(
+              elevation: 5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    child: FittedBox(
+                      child: Image.network(wonders[index].imageUrl),
+                      fit: BoxFit.fill,
+                    ),
+                    padding: EdgeInsets.all(10),
+                  ),
+                  Padding(
+                      child: Text(
+                        wonders[index].name,
+                      ),
+                      padding: EdgeInsets.only(left: 10)),
+                  Padding(
+                      child: Text(
+                        wonders[index].price,
+                      ),
+                      padding: EdgeInsets.all(10))
+                ],
+              ),
+            ));
+      },
+    ),
+  );
+}
 
 class Items extends StatelessWidget {
   Items({
@@ -510,35 +543,9 @@ class CustomAppBar extends StatelessWidget {
   }
 }
 
-// List wonders = [
-//   Product(
-//       imageUrl:
-//           "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
-//       name: "Burgger",
-//       price: "RS:120"),
-//   Product(
-//       imageUrl:
-//           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRgDq2lpftUsHdJuwUny9AfbFEe7mV_sragQ&usqp=CAU",
-//       name: "Vanilla Cream",
-//       price: "RS:100"),
-//   Product(
-//       imageUrl:
-//           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
-//       name: "Coffee",
-//       price: "RS:50"),
-//   Product(
-//       imageUrl:
-//           "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
-//       name: "Burgger",
-//       price: "RS:120"),
-//   Product(
-//       imageUrl:
-//           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoHXZh9ifxtm_uJ9WZpb7aBjzPW3bytkMWag&usqp=CAU",
-//       name: "Vanilla Cream",
-//       price: "RS:100"),
-//   Product(
-//       imageUrl:
-//           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
-//       name: "Brue Coffee",
-//       price: "RS:50"),
-// ];
+class Prod {
+  String imageUrl;
+  String name;
+  String price;
+  Prod({this.imageUrl, this.name, this.price});
+}
