@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/Login_Screen.dart';
+import 'package:flutter_app/screens/Admin_Login_Screen.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -123,7 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()));
+                                builder: (context) => AdminLoginPage()));
                       },
                     )),
               ],

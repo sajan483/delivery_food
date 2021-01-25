@@ -81,13 +81,26 @@ class _PaymentPageState extends State<PaymentPage> {
                   child: Text('Buy Now'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.white)),
+                      side: BorderSide(color: Colors.orange)),
                   onPressed: () {},
                 ))
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-          items: [BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Blue")),],
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.payment,color: Colors.orange,),
+                title: Text(
+                  "Payment",
+                )),
+                 BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text(
+                  "Home",
+                )),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.history), title: Text("History"))
+          ],
         ));
   }
 }

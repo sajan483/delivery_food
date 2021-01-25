@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_app/Models/Product.dart';
-import 'package:flutter_app/screens/Login_Screen.dart';
+import 'package:flutter_app/screens/Admin_Login_Screen.dart';
 import 'package:flutter_app/screens/Payment_Screen.dart';
 import 'package:flutter_app/screens/Product_Dettails_Screen.dart';
 import 'package:flutter_app/Service/Api_Service.dart';
@@ -23,74 +23,91 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(20),
-              //color: Themes.color,
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 100,
-                      height: 100,
-                      margin: EdgeInsets.only(top: 30, bottom: 10),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                'https://cdn2.iconfinder.com/data/icons/website-icons/512/User_Avatar-512.png'),
-                            fit: BoxFit.fill),
+        resizeToAvoidBottomInset: false,
+        drawer: Drawer(
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(20),
+                //color: Themes.color,
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        width: 100,
+                        height: 100,
+                        margin: EdgeInsets.only(top: 30, bottom: 10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  'https://cdn2.iconfinder.com/data/icons/website-icons/512/User_Avatar-512.png'),
+                              fit: BoxFit.fill),
+                        ),
                       ),
-                    ),
-                    Text(
-                      'Name: user',
-                      style: TextStyle(fontSize: 22, color: Colors.black87),
-                    ),
-                    Text(
-                      'Email: user@gmail.com',
-                      style: TextStyle(color: Colors.black87),
-                    )
-                  ],
+                      Text(
+                        'Name: user',
+                        style: TextStyle(fontSize: 22, color: Colors.black87),
+                      ),
+                      Text(
+                        'Email: user@gmail.com',
+                        style: TextStyle(color: Colors.black87),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text(
-                'Setting',
-                style: TextStyle(fontSize: 18),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text(
+                  'Setting',
+                  style: TextStyle(fontSize: 18),
+                ),
+                onTap: null,
               ),
-              onTap: null,
-            ),
-            ListTile(
-              leading: Icon(Icons.arrow_back),
-              title: Text(
-                'Logout',
-                style: TextStyle(fontSize: 18),
+              ListTile(
+                leading: Icon(Icons.arrow_back),
+                title: Text(
+                  'Logout',
+                  style: TextStyle(fontSize: 18),
+                ),
+                onTap: () {
+                  print('User Signed Out');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AdminLoginPage()));
+                },
               ),
-              onTap: () {
-                print('User Signed Out');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
-              },
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      body: SafeArea(
-          child: Container(
-        child: ListView(
-          children: <Widget>[
-            FirstHalf(),
-            SizedBox(height: 45),
-          ],
+        body: SafeArea(
+            child: Container(
+          child: ListView(
+            children: <Widget>[
+              FirstHalf(),
+              SizedBox(height: 45),
+            ],
+          ),
+        )),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add),
+          backgroundColor: Colors.orange,
         ),
-      )),
-    );
+         bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home,color: Colors.orange,),
+                title: Text(
+                  "Home",
+                )),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.history), title: Text("History"))
+          ],
+        ));
   }
 
   fetchProduct() {
@@ -223,29 +240,31 @@ Widget products() {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => PaymentPage()));
             },
-            child: Card(
-              elevation: 5,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    child: FittedBox(
-                      child: Image.network(wonders[index].imageUrl),
-                      fit: BoxFit.fill,
+            child: Container(
+              child: Card(
+                elevation: 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      child: FittedBox(
+                        child: Image.network(wonders[index].imageUrl),
+                        fit: BoxFit.fill,
+                      ),
+                      padding: EdgeInsets.all(10),
                     ),
-                    padding: EdgeInsets.all(10),
-                  ),
-                  Padding(
-                      child: Text(
-                        wonders[index].name,
-                      ),
-                      padding: EdgeInsets.only(left: 10)),
-                  Padding(
-                      child: Text(
-                        wonders[index].price,
-                      ),
-                      padding: EdgeInsets.all(10))
-                ],
+                    Padding(
+                        child: Text(
+                          wonders[index].name,
+                        ),
+                        padding: EdgeInsets.only(left: 10)),
+                    Padding(
+                        child: Text(
+                          wonders[index].price,
+                        ),
+                        padding: EdgeInsets.all(10))
+                  ],
+                ),
               ),
             ));
       },
