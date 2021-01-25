@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_app/Models/Product.dart';
+import 'package:flutter_app/screens/Add_Product_Screen.dart';
 import 'package:flutter_app/screens/Admin_Login_Screen.dart';
 import 'package:flutter_app/screens/Payment_Screen.dart';
 import 'package:flutter_app/screens/Product_Dettails_Screen.dart';
@@ -93,19 +94,24 @@ class _ListPageState extends State<ListPage> {
           ),
         )),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddProductPage()));
+          },
           child: Icon(Icons.add),
           backgroundColor: Colors.orange,
         ),
-         bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home,color: Colors.orange,),
-                title: Text(
-                  "Home",
-                )),
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.orange,
+                ),
+                title: Text("Home", style: TextStyle(fontSize: 12))),
             BottomNavigationBarItem(
-                icon: Icon(Icons.history), title: Text("History"))
+                icon: Icon(Icons.history),
+                title: Text("History", style: TextStyle(fontSize: 12)))
           ],
         ));
   }
@@ -137,7 +143,7 @@ class FirstHalf extends StatelessWidget {
           title(),
           SizedBox(height: 10),
           searchBar(),
-          SizedBox(height: 45),
+          SizedBox(height: 10),
           categories(),
           SizedBox(height: 10),
           products()
@@ -147,7 +153,7 @@ class FirstHalf extends StatelessWidget {
   }
 }
 
-Widget categories() {
+Widget categoriess() {
   return Container(
     height: 185,
     child: ListView(
@@ -188,6 +194,94 @@ Widget categories() {
           categoryName: "Rolls",
           availability: 1,
           selected: true,
+        ),
+      ],
+    ),
+  );
+}
+
+Widget categories() {
+  return Container(
+    height: 50,
+    child: ListView(
+      scrollDirection: Axis.horizontal,
+      children: <Widget>[
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.orange),
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          child: Text(
+            "Burgger",
+            style: TextStyle(fontSize: 12),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.orange),
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          child: Text(
+            "Pizza",
+            style: TextStyle(fontSize: 12),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.orange),
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          child: Text(
+            "Ice Cream",
+            style: TextStyle(fontSize: 12),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.orange),
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          child: Text(
+            "Cake",
+            style: TextStyle(fontSize: 12),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.orange),
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          child: Text(
+            "Cold Coffee",
+            style: TextStyle(fontSize: 12),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.orange),
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          child: Text(
+            "Brue",
+            style: TextStyle(fontSize: 12),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.orange),
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          child: Text(
+            "Desert",
+            style: TextStyle(fontSize: 12),
+          ),
         ),
       ],
     ),
@@ -256,11 +350,13 @@ Widget products() {
                     Padding(
                         child: Text(
                           wonders[index].name,
+                          style: TextStyle(fontSize: 12),
                         ),
                         padding: EdgeInsets.only(left: 10)),
                     Padding(
                         child: Text(
                           wonders[index].price,
+                          style: TextStyle(fontSize: 12),
                         ),
                         padding: EdgeInsets.all(10))
                   ],
@@ -524,7 +620,7 @@ Widget title() {
     mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
       SizedBox(width: 45),
-      Column(
+      Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(

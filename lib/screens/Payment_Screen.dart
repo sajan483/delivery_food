@@ -59,6 +59,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Enter Card Name',
+                   labelStyle: TextStyle(fontSize: 12)
                 ),
               ),
             ),
@@ -68,11 +69,12 @@ class _PaymentPageState extends State<PaymentPage> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Enter Valid Card  Number',
+                  labelStyle: TextStyle(fontSize: 12)
                 ),
               ),
             ),
             Container(
-                height: 50,
+                height: 40,
                 width: 200,
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: RaisedButton(
@@ -89,17 +91,20 @@ class _PaymentPageState extends State<PaymentPage> {
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.payment,color: Colors.orange,),
+                icon: Icon(
+                  Icons.payment,
+                  color: Colors.orange,
+                ),
                 title: Text(
-                  "Payment",
-                )),
-                 BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text(
-                  "Home",
+                  "Payment",style: TextStyle(fontSize: 12)
                 )),
             BottomNavigationBarItem(
-                icon: Icon(Icons.history), title: Text("History"))
+                icon: Icon(Icons.home),
+                title: Text(
+                  "Home",style: TextStyle(fontSize: 12)
+                )),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.history), title: Text("History",style: TextStyle(fontSize: 12),),)
           ],
         ));
   }

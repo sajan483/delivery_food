@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/Admin_Login_Screen.dart';
+import 'package:flutter_app/screens/List_Screen.dart';
 
-class SignUpPage extends StatefulWidget {
+class AddProductPage extends StatefulWidget {
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _AddProductPageState createState() => _AddProductPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+class _AddProductPageState extends State<AddProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +20,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Enter Name',
+                      labelText: 'Enter Product Name',
                       labelStyle: TextStyle(fontSize: 12)
                     ),
                   ),
@@ -33,10 +30,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    //controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Enter Email',
+                      labelText: 'Enter Category',
                       labelStyle: TextStyle(fontSize: 12)
                     ),
                   ),
@@ -44,10 +41,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    //controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Enter Phone Number',
+                      labelText: 'Enter Quantity',
                       labelStyle: TextStyle(fontSize: 12)
                     ),
                   ),
@@ -55,7 +52,29 @@ class _SignUpPageState extends State<SignUpPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    //controller: nameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter Price',
+                      labelStyle: TextStyle(fontSize: 12)
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    //controller: nameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter Expiry Date',
+                      labelStyle: TextStyle(fontSize: 12)
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    //controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Enter Location',
@@ -66,18 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Enter State',
-                      labelStyle: TextStyle(fontSize: 12)
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: nameController,
+                    //controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Enter District',
@@ -88,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    //controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Enter Pin Code',
@@ -99,22 +107,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Enter User Name',
-                      labelStyle: TextStyle(fontSize: 12)
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
                     obscureText: true,
-                    controller: passwordController,
+                    //controller: passwordController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Enter Password',
+                      labelText: 'Enter State',
                       labelStyle: TextStyle(fontSize: 12)
                     ),
                   ),
@@ -125,14 +122,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: RaisedButton(
                       textColor: Colors.white,
                       color: Colors.orange,
-                      child: Text('Sign In'),
+                      child: Text('Add Product'),
                       onPressed: () {
-                        print(nameController.text);
-                        print(passwordController.text);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AdminLoginPage()));
+                                builder: (context) => ListPage()));
                       },
                     )),
               ],

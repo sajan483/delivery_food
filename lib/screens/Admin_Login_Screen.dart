@@ -36,9 +36,9 @@ class _State extends State<AdminLoginPage> {
                   child: TextField(
                     controller: nameController,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'User Name',
-                    ),
+                        border: OutlineInputBorder(),
+                        labelText: 'User Name',
+                        labelStyle: TextStyle(fontSize: 12)),
                   ),
                 ),
                 Container(
@@ -47,9 +47,9 @@ class _State extends State<AdminLoginPage> {
                     obscureText: true,
                     controller: passwordController,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
+                        border: OutlineInputBorder(),
+                        labelText: 'Password',
+                        labelStyle: TextStyle(fontSize: 12)),
                   ),
                 ),
                 FlatButton(
@@ -57,7 +57,10 @@ class _State extends State<AdminLoginPage> {
                     //forgot password screen
                   },
                   textColor: Colors.blue,
-                  child: Text('Forgot Password'),
+                  child: Text(
+                    'Forgot Password',
+                    style: TextStyle(fontSize: 12),
+                  ),
                 ),
                 Container(
                     height: 50,
@@ -78,12 +81,15 @@ class _State extends State<AdminLoginPage> {
                 Container(
                     child: Row(
                   children: <Widget>[
-                    Text('Does not have account?'),
+                    Text(
+                      'Does not have account?',
+                      style: TextStyle(fontSize: 12),
+                    ),
                     FlatButton(
                       textColor: Colors.blue,
                       child: Text(
                         'Sign Up',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 14),
                       ),
                       onPressed: () {
                         Navigator.push(
