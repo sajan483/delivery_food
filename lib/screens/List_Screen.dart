@@ -3,9 +3,11 @@ import "package:flutter/material.dart";
 import 'package:flutter_app/Models/Product.dart';
 import 'package:flutter_app/screens/Add_Product_Screen.dart';
 import 'package:flutter_app/screens/Admin_Login_Screen.dart';
+import 'package:flutter_app/screens/First_Screen.dart';
 import 'package:flutter_app/screens/Payment_Screen.dart';
 import 'package:flutter_app/screens/Product_Dettails_Screen.dart';
 import 'package:flutter_app/Service/Api_Service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ListPage extends StatefulWidget {
   @override
@@ -14,10 +16,12 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   List<ProductList> productList = new List();
+  String user;
 
   @override
   void initState() {
-    //fetchProduct();
+    fetchProduct();
+    getStringValuesSF();
     super.initState();
   }
 
@@ -78,7 +82,7 @@ class _ListPageState extends State<ListPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AdminLoginPage()));
+                          builder: (context) => FirstPage()));
                 },
               ),
             ],
@@ -88,19 +92,25 @@ class _ListPageState extends State<ListPage> {
             child: Container(
           child: ListView(
             children: <Widget>[
-              FirstHalf(),
+              FirstHalf(
+                user: user,
+              ),
               SizedBox(height: 45),
             ],
           ),
         )),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AddProductPage()));
-          },
-          child: Icon(Icons.add),
-          backgroundColor: Colors.orange,
-        ),
+        floatingActionButton: (user == "admin")
+            ? FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddProductPage()));
+                },
+                child: Icon(Icons.add),
+                backgroundColor: Colors.orange,
+              )
+            : null,
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
@@ -124,10 +134,20 @@ class _ListPageState extends State<ListPage> {
     });
     print(productList);
   }
+
+  getStringValuesSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    user = prefs.getString('user');
+    if (user != null) {
+      setState(() {});
+    }
+  }
 }
 
 class FirstHalf extends StatelessWidget {
+  final String user;
   const FirstHalf({
+    this.user,
     Key key,
   }) : super(key: key);
 
@@ -138,7 +158,6 @@ class FirstHalf extends StatelessWidget {
       child: Column(
         children: <Widget>[
           CustomAppBar(),
-          //you could also use the spacer widget to give uneven distances, i just decided to go with a sizebox
           SizedBox(height: 20),
           title(),
           SizedBox(height: 10),
@@ -148,6 +167,87 @@ class FirstHalf extends StatelessWidget {
           SizedBox(height: 10),
           products()
         ],
+      ),
+    );
+  }
+
+  Widget products() {
+    List wonders = [
+      Prod(
+          imageUrl:
+              "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
+          name: "Burgger",
+          price: "RS:120"),
+      Prod(
+          imageUrl:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRgDq2lpftUsHdJuwUny9AfbFEe7mV_sragQ&usqp=CAU",
+          name: "Vanilla Cream",
+          price: "RS:100"),
+      Prod(
+          imageUrl:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
+          name: "Coffee",
+          price: "RS:50"),
+      Prod(
+          imageUrl:
+              "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
+          name: "Burgger",
+          price: "RS:120"),
+      Prod(
+          imageUrl:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoHXZh9ifxtm_uJ9WZpb7aBjzPW3bytkMWag&usqp=CAU",
+          name: "Vanilla Cream",
+          price: "RS:100"),
+      Prod(
+          imageUrl:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
+          name: "Brue Coffee",
+          price: "RS:50"),
+    ];
+
+    return Container(
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: wonders.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+              onTap: () {
+                if (user == "user") {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PaymentPage()));
+                }
+              },
+              child: Container(
+                child: Card(
+                  elevation: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        child: FittedBox(
+                          child: Image.network(wonders[index].imageUrl),
+                          fit: BoxFit.fill,
+                        ),
+                        padding: EdgeInsets.all(10),
+                      ),
+                      Padding(
+                          child: Text(
+                            wonders[index].name,
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          padding: EdgeInsets.only(left: 10)),
+                      Padding(
+                          child: Text(
+                            wonders[index].price,
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          padding: EdgeInsets.all(10))
+                    ],
+                  ),
+                ),
+              ));
+        },
       ),
     );
   }
@@ -284,86 +384,6 @@ Widget categories() {
           ),
         ),
       ],
-    ),
-  );
-}
-
-Widget products() {
-  List wonders = [
-    Prod(
-        imageUrl:
-            "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
-        name: "Burgger",
-        price: "RS:120"),
-    Prod(
-        imageUrl:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRgDq2lpftUsHdJuwUny9AfbFEe7mV_sragQ&usqp=CAU",
-        name: "Vanilla Cream",
-        price: "RS:100"),
-    Prod(
-        imageUrl:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
-        name: "Coffee",
-        price: "RS:50"),
-    Prod(
-        imageUrl:
-            "https://media.istockphoto.com/photos/mouthwatering-delicious-homemade-burger-used-to-chop-beef-on-the-picture-id907077304?k=6&m=907077304&s=612x612&w=0&h=N0o_NtwciuBRFPg56dD8vBYiTxJvgJBRz8Z7sRIfd38=",
-        name: "Burgger",
-        price: "RS:120"),
-    Prod(
-        imageUrl:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoHXZh9ifxtm_uJ9WZpb7aBjzPW3bytkMWag&usqp=CAU",
-        name: "Vanilla Cream",
-        price: "RS:100"),
-    Prod(
-        imageUrl:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpEyZRGVrTEKG0SGxCGiuVbJwRdR5ia6Uwlg&usqp=CAU",
-        name: "Brue Coffee",
-        price: "RS:50"),
-  ];
-
-  return Container(
-    child: ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: wonders.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-            onTap: () {
-              var wonders;
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PaymentPage()));
-            },
-            child: Container(
-              child: Card(
-                elevation: 5,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      child: FittedBox(
-                        child: Image.network(wonders[index].imageUrl),
-                        fit: BoxFit.fill,
-                      ),
-                      padding: EdgeInsets.all(10),
-                    ),
-                    Padding(
-                        child: Text(
-                          wonders[index].name,
-                          style: TextStyle(fontSize: 12),
-                        ),
-                        padding: EdgeInsets.only(left: 10)),
-                    Padding(
-                        child: Text(
-                          wonders[index].price,
-                          style: TextStyle(fontSize: 12),
-                        ),
-                        padding: EdgeInsets.all(10))
-                  ],
-                ),
-              ),
-            ));
-      },
     ),
   );
 }

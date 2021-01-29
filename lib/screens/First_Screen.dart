@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/Admin_Login_Screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -7,6 +8,8 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  Future<String> _user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +34,7 @@ class _FirstPageState extends State<FirstPage> {
                     borderRadius: BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.orange)),
                 onPressed: () {
+                  addStringToSF("admin");
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -49,7 +53,13 @@ class _FirstPageState extends State<FirstPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.orange)),
-                onPressed: () {},
+                onPressed: () {
+                  addStringToSF("user");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AdminLoginPage()));
+                },
               )),
           Container(
               height: 50,
@@ -63,11 +73,22 @@ class _FirstPageState extends State<FirstPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.orange)),
-                onPressed: () {},
+                onPressed: () {
+                  addStringToSF("deliverry boy");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AdminLoginPage()));
+                },
               ))
         ],
       ),
     );
+  }
+
+  addStringToSF(String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('user', value);
   }
 }
 
