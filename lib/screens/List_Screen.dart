@@ -133,6 +133,7 @@ class _ListPageState extends State<ListPage> {
       }
     });
     print(productList);
+    
   }
 
   getStringValuesSF() async {
