@@ -20,7 +20,7 @@ class _ListPageState extends State<ListPage> {
 
   @override
   void initState() {
-    fetchProduct();
+    //fetchProduct();
     getStringValuesSF();
     super.initState();
   }
